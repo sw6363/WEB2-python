@@ -1,0 +1,36 @@
+#!C:\Users\LJH\AppData\Local\Programs\Python\Python38-32\python.exe
+print("content-type:text/html; charset=UTF-8\n")
+
+import cgi
+form = cgi.FieldStorage()
+pageId = form["id"].value
+
+print('''<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+  <title>Web1 - Welcome</title>
+  <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="colors.js"></script>
+</head>
+
+<body>
+  <h1><a href="index.py?id=Web">WEB</a></h1>
+  <input type="button" value="night" onclick="
+    nightDayHandler(this)
+">
+  <div id="grid">
+  <ol>
+    <li><a href="index.py?id=HTML">HTML</a></li>
+    <li><a href="index.py?id=CSS">CSS</a></li>
+    <li><a href="index.py?id=JavaScript">JavaScript</a></li>
+  </ol>
+  <div id="article">
+  <h2>{title}</h2>
+  <p>The World Wide Web (WWW), commonly known as the Web, is an information system where documents and other web resources are identified by Uniform Resource Locators, which may be interlinked by hypertext, and are accessible over the Internet. The resources of the WWW are transferred via the Hypertext Transfer Protocol (HTTP) and may be accessed by users by a software application called a web browser and are published by a software application called a web server.</p>
+</div>
+</div>
+</body>
+</html>
+'''.format(title=pageId))
