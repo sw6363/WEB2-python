@@ -3,8 +3,13 @@ print("content-type:text/html; charset=UTF-8\n")
 
 import cgi
 form = cgi.FieldStorage()
-pageId = form["id"].value
+if 'id' in form:
+    pageId = form["id"].value
+    description = open('data/'+pageId, 'r').read()
 
+else:
+    pageId = 'Welcome'
+    description = 'Hello, web'
 print('''<!DOCTYPE html>
 <html lang="ko" dir="ltr">
 <head>
@@ -16,7 +21,7 @@ print('''<!DOCTYPE html>
 </head>
 
 <body>
-  <h1><a href="index.py?id=Web">WEB</a></h1>
+  <h1><a href="index.py">WEB</a></h1>
   <input type="button" value="night" onclick="
     nightDayHandler(this)
 ">
@@ -25,12 +30,13 @@ print('''<!DOCTYPE html>
     <li><a href="index.py?id=HTML">HTML</a></li>
     <li><a href="index.py?id=CSS">CSS</a></li>
     <li><a href="index.py?id=JavaScript">JavaScript</a></li>
+    <li><a href="index.py?id=Python">Python</a></li>
   </ol>
   <div id="article">
   <h2>{title}</h2>
-  <p>The World Wide Web (WWW), commonly known as the Web, is an information system where documents and other web resources are identified by Uniform Resource Locators, which may be interlinked by hypertext, and are accessible over the Internet. The resources of the WWW are transferred via the Hypertext Transfer Protocol (HTTP) and may be accessed by users by a software application called a web browser and are published by a software application called a web server.</p>
+  <p>{desc}</p>
 </div>
 </div>
 </body>
 </html>
-'''.format(title=pageId))
+'''.format(title=pageId, desc=description))
